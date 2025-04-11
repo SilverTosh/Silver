@@ -1,0 +1,4 @@
+module.exports.config = {
+    gptMenu: true, // Set to true or false to enable or disable the GPT menu
+    // Other settings can be added here, such as credentials or API keys
+};
