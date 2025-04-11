@@ -1,0 +1,42 @@
+const { Client } = require('whatsapp-web.js');
+const qrcode = require('qrcode-terminal');
+const fs = require('fs');
+const { config } = require('./config');
+const client = new Client();
+
+client.on('qr', (qr) => {
+    // Generate and scan this QR code to authenticate
+    qrcode.generate(qr, { small: true });
+});
+
+client.on('ready', () => {
+    console.log('KINGVON-MD bot is now online!');
+});
+
+client.on('message', async (message) => {
+    const { body, from } = message;
+
+    // .menu command
+    if (config.gptMenu && body.startsWith('.menu')) {
+        message.reply(`𝐊𝐈𝐍𝐆𝐕𝐎𝐍-𝐌𝐃 
+#𝐅𝐑𝐄𝐄 𝐃𝐔𝐑𝐊
+ ♦𝐏𝐢𝐧𝐠
+ ♦𝐠𝐩𝐭
+ ♦𝐦𝐞𝐝𝐢𝐚
+ ♦𝐬𝐭𝐚𝐭𝐮𝐬
+ ♦𝐮𝐭𝐢𝐥𝐬
+ ♦𝐡𝐞𝐥𝐩
+ ♦𝐦𝐞𝐧𝐮
+𝐌𝐎𝐑𝐄 𝐔𝐏𝐃𝐀𝐓𝐄𝐒 𝐎𝐅 𝐓𝐇𝐄 𝐁𝐎𝐓 𝐂𝐎𝐌𝐈𝐍𝐆 𝐒𝐎𝐎𝐍
+🔥🔥`);
+    }
+
+    // .ping command
+    if (body.startsWith('.ping')) {
+        message.reply('pong');
+    }
+
+    // Add other commands like .gpt, .media, .status, etc.
+});
+
+client.initialize();
